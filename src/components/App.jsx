@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   addContact = ({ name, number }) => {
-    if (this.state.contacts.find(contact => contact.name === name)) {
+    if (this.state.contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       alert(`${name} is already in contacts`);
       return;
     }
@@ -19,7 +19,7 @@ class App extends Component {
       contacts: [
         {
           id: (Math.random() * 1000).toFixed(32),
-          name,
+          name: name.toLowerCase(),  // Перетворено на нижній регістр
           number,
         },
         ...contacts,
@@ -34,7 +34,7 @@ class App extends Component {
   };
 
   changeFilter = event => {
-    this.setState({ filter: event.currentTarget.value });
+    this.setState({ filter: event.currentTarget.value.toLowerCase() });  // Перетворено на нижній регістр
   };
 
   getVisibleContacts = () => {
